@@ -1,3 +1,9 @@
+@import "compass/support";
+
+// The legacy support threshold for float.
+// Defaults to the $critical-usage-threshold.
+$legacy-float-support-threshold: $critical-usage-threshold !default;
+
 // Implementation of float:left with fix for the
 // [double-margin bug in IE5/6](http://www.positioniseverything.net/explorer/doubled-margin.html)
 @mixin float-left {
@@ -11,8 +17,9 @@
 // Direction independent float mixin that fixes the
 // [double-margin bug in IE5/6](http://www.positioniseverything.net/explorer/doubled-margin.html)
 @mixin float($side: left) {
-  display: inline;
-  float: unquote($side); }
+  float: unquote($side);
+  @if support-legacy-browser("ie", "6", $threshold: $legacy-float-support-threshold) {
+    display: inline; } }
 
 // Resets floated elements back to their default of `float: none` and defaults
 // to `display: block` unless you pass `inline` as an argument
@@ -27,4 +34,5 @@
 //         +reset-float
 @mixin reset-float($display: block) {
   float: none;
-  display: $display; }
+  @if support-legacy-browser("ie", "6", $threshold: $legacy-float-support-threshold) {
+    display: $display; } }

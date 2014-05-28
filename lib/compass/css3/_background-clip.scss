@@ -1,43 +1,35 @@
-@import "shared";
+// Background Clip
+@import "compass/support";
 
-// The default value is `padding-box` -- the box model used by modern browsers.
-//
-// If you wish to do so, you can override the default constant with `border-box`
-//
-// To override to the default border-box model, use this code:
-//     $default-background-clip: border-box
+// The the user threshold for background-clip support. Defaults to `$critical-usage-threshold`
+$background-clip-support-threshold: $critical-usage-threshold !default;
 
+// The default border-box model: [border-box | padding-box | content-box]
 $default-background-clip: padding-box !default;
 
-// Clip the background (image and color) at the edge of the padding or border.
-//
-// Legal Values:
-//
-//   * padding-box
-//   * border-box
-//   * text
 
-@mixin background-clip($clip: $default-background-clip) {
-  // webkit and mozilla use the deprecated short [border | padding]
-  $clip: unquote($clip);
-  $deprecated: $clip;
-  @if $clip == padding-box { $deprecated: padding; }
-  @if $clip == border-box { $deprecated: border; }
-  // Support for webkit and mozilla's use of the deprecated short form
-  @include experimental(background-clip, $deprecated,
-    -moz,
-    -webkit,
-    not -o,
-    not -ms,
-    not -khtml,
-    not official
-  );
-  @include experimental(background-clip, $clip,
-    not -moz,
-    not -webkit,
-    not -o,
-    not -ms,
-    -khtml,
-    official
-  );
+// Clip the background (image and color) at the edge of the padding, border, or content.
+//   $clip... : [padding-box | border-box | content-box]
+@mixin background-clip($clip...) {
+  $output: ();
+  $deprecated: ();
+
+  @if (length($clip) > 0) {
+    @each $layer in $clip {
+      $output: append($output, unquote($layer), comma);
+      $deprecated: append($deprecated, legacy-box($layer), comma);
+    }
+  } @else {
+    $output: $default-background-clip;
+    $deprecated: legacy-box($default-background-clip);
+  }
+
+  @include with-each-prefix(background-img-opts, $background-clip-support-threshold) {
+    @if $current-prefix == -moz or $current-prefix == -webkit {
+      // Legacy versions of Mozilla support a different syntax, prefixed.
+      @include prefix-prop(background-clip, $deprecated);
+    } @else {
+      @include prefix-prop(background-clip, $output);
+    }
+  }
 }
