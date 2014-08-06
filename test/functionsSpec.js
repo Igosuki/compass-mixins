@@ -5,7 +5,7 @@ var libDir = __dirname.replace(/test$/, 'lib');
 
 var render = function(data, callback) {
   sass.render({
-    data: '@import "'+libDir+'/functions";' + data,
+    data: '@import "'+libDir+'/compass/functions";' + data,
     outputStyle: 'compressed',
     success: function(output){
       callback(output);
