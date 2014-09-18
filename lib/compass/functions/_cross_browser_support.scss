@@ -1,3 +1,8 @@
+// 
+// A partial implementation of the Ruby cross browser support functions from Compass:
+// https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/cross_browser_support.rb
+// 
+
 @function prefix($prefix, $property) {
   @return #{$prefix}-#{$property};
 }
