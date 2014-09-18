@@ -1,0 +1,27 @@
+@function prefix($prefix, $property) {
+  @return #{$prefix}-#{$property};
+}
+
+@function -svg($property) {
+  @return prefix('-svg', $property);
+}
+
+@function -owg($property) {
+  @return prefix('-owg', $property);
+}
+
+@function -webkit($property) {
+  @return prefix('-webkit', $property);
+}
+
+@function -moz($property) {
+  @return prefix('-moz', $property);
+}
+
+@function -o($property) {
+  @return prefix('-o', $property);
+}
+
+@function -pie($property) {
+  @return prefix('-pie', $property);
+}
