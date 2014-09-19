@@ -3,8 +3,22 @@
 // https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/cross_browser_support.rb
 // 
 
-@function prefix($prefix, $property) {
-  @return #{$prefix}-#{$property};
+@function prefix($prefix, $property1, $property2:null, $property3:null, $property4:null, $property5:null, $property6:null, $property7:null, $property8:null, $property9:null) {
+  $properties: $property1, $property2, $property3, $property4, $property5, $property6, $property7, $property8, $property9;
+  $props: false;
+  @each $item in $properties {
+    @if $item == null {}
+    @else {
+      $item: #{$prefix}-#{$item};
+      @if $props {
+        $props: $props, $item;
+      }
+      @else {
+        $props: $item;
+      }
+    }
+  }
+  @return $props;
 }
 
 @function -svg($property) {
