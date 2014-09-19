@@ -18,7 +18,7 @@ $hide-text-direction: left !default;
   @include hide-text;
   background: {
     @if is-url($img) {
-      image: $img;
+      image: url($img);
     } @else {
       image: image-url($img);
     }
