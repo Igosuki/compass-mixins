@@ -79,7 +79,7 @@ describe("Cross Browser Functions", function () {
 
   it("should prefix a list of properties", function(done) {
     render(property('prefix(-webkit, x, y, z)'), function(output, err) {
-      expect(output).toBe(property('-webkit-x, -webkit-y, -webkit-z'));
+      expect(output).toBe(property('-webkit-x,-webkit-y,-webkit-z'));
       done();
     });
   });
