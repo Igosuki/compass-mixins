@@ -21,7 +21,7 @@ var property = function(prop) {
   return 'a{b:'+prop+';}';
 }
 
-describe("Functions", function () {
+describe("List Functions", function () {
 
   // This is verifying a function that's part of libsass that Compass also provided.
   it("should compact a list with false values", function (done) {
@@ -62,6 +62,24 @@ describe("Functions", function () {
   it("should reject values from a list", function(done) {
     render('$list: one, two, three, four;' + property('reject($list, two, four)'), function(output, err) {
       expect(output).toBe(property('one,three'));
+      done();
+    });
+  });
+
+});
+
+describe("Cross Browser Functions", function () {
+
+  it("should prefix a property", function(done) {
+    render(property('prefix(-webkit, x)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x'));
+      done();
+    });
+  });
+
+  it("should prefix a list of properties", function(done) {
+    render(property('prefix(-webkit, x, y, z)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x, -webkit-y, -webkit-z'));
       done();
     });
   });
