@@ -1,25 +1,5 @@
-var sass = require('node-sass');
-var chalk = require('chalk');
-
-var libDir = __dirname.replace(/test$/, 'lib');
-
-var render = function(data, callback) {
-  sass.render({
-    data: '@import "'+libDir+'/compass/functions";' + data,
-    outputStyle: 'compressed',
-    success: function(output){
-      callback(output);
-    },
-    error: function(err){
-      console.log(chalk.red("Sass error:"), err);
-      callback('', err);
-    }
-  });
-}
-
-var property = function(prop) {
-  return 'a{b:'+prop+';}';
-}
+var render = require('./helper/render');
+var property = require('./helper/property');
 
 describe("List Functions", function () {
 
@@ -87,6 +67,34 @@ describe("Cross Browser Functions", function () {
   it("should prefix a list of complex properties", function(done) {
     render(property('prefix(-webkit, linear-gradient(-45deg, rgb(0,0,0) 25%, transparent 75%, transparent), linear-gradient(-45deg, #000 25%, transparent 75%, transparent))'), function(output, err) {
       expect(output).toBe(property('-webkit-linear-gradient(-45deg, #000000 25%, transparent 75%, transparent),-webkit-linear-gradient(-45deg, #000 25%, transparent 75%, transparent)'));
+      done();
+    });
+  });
+
+  it("should prefix a list of properties as a single argument", function(done) {
+    render('$list: x, y, z;' + property('prefix(-webkit, $list)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x,-webkit-y,-webkit-z'));
+      done();
+    });
+  });
+
+  it("should prefix a property with a browser function", function(done){
+    render(property('-webkit(x)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x'));
+      done();
+    });
+  });
+
+  it("should prefix a list of properties with a browser function", function(done) {
+    render(property('-webkit(x, y, z)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x,-webkit-y,-webkit-z'));
+      done();
+    });
+  });
+
+  it("should prefix a list of properties with a browser function as a single argument", function(done) {
+    render('$list: x, y, z;' + property('-webkit($list)'), function(output, err) {
+      expect(output).toBe(property('-webkit-x,-webkit-y,-webkit-z'));
       done();
     });
   });
