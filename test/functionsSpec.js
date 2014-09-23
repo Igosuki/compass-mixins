@@ -99,4 +99,11 @@ describe("Cross Browser Functions", function () {
     });
   });
 
+  it("should not prefix numbers or colors", function(done){
+    render(property('prefixed(-ok, rgb(0,0,0))')+property('prefixed(-ok, url(1.gif))')+property('prefixed(-ok, ok)'), function(output, err) {
+      expect(output).toBe(property('false')+property('false')+property('true'));
+      done();
+    });
+  });
+
 });
