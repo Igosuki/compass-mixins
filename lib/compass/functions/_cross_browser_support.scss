@@ -31,7 +31,9 @@
   @each $item in $properties {
     @if $item == null {}
     @else {
-      $item: #{$prefix}-#{$item};
+      @if prefixed($prefix, $item) {
+        $item: #{$prefix}-#{$item};
+      }
       @if $props {
         $props: $props, $item;
       }

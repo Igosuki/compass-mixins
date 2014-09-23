@@ -46,6 +46,20 @@ describe("List Functions", function () {
     });
   });
 
+  it("should get the first value of a list", function(done) {
+    render('$list: one, two, three, four;' + property('first-value-of($list)'), function(output, err) {
+      expect(output).toBe(property('one'));
+      done();
+    });
+  });
+
+  it("should create a space-delimited list", function(done) {
+    render(property('-compass-space-list(a, b, c)'), function(output, err) {
+      expect(output).toBe(property('a b c'));
+      done();
+    });
+  });
+
 });
 
 describe("Cross Browser Functions", function () {
@@ -102,6 +116,17 @@ describe("Cross Browser Functions", function () {
   it("should not prefix numbers or colors", function(done){
     render(property('prefixed(-ok, rgb(0,0,0))')+property('prefixed(-ok, url(1.gif))')+property('prefixed(-ok, ok)'), function(output, err) {
       expect(output).toBe(property('false')+property('false')+property('true'));
+      done();
+    });
+  });
+
+});
+
+describe("Gradient Functions", function () {
+
+  it("should prefix a list with color stops", function(done) {
+    render(property('prefix(-webkit, linear-gradient(-45deg, color-stops(rgb(0,0,0) 25%, transparent 75%, transparent)), linear-gradient(-45deg, color-stops(#000 25%, transparent 75%, transparent)))'), function(output, err) {
+      expect(output).toBe(property('-webkit-linear-gradient(-45deg, #000000 25%, transparent 75%, transparent),-webkit-linear-gradient(-45deg, #000 25%, transparent 75%, transparent)'));
       done();
     });
   });
