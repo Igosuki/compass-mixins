@@ -18,6 +18,8 @@
 }
 
 @function prefix($prefix, $property1, $property2:null, $property3:null, $property4:null, $property5:null, $property6:null, $property7:null, $property8:null, $property9:null) {
+  $properties: "";
+
   // Support for polymorphism.
   @if length($property1) > 1 and $property2 == null {
     // Passing a single array of properties.
