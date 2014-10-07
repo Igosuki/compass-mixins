@@ -12,7 +12,7 @@ To make those functions available to your compass mixins, you'll want to either 
 
 ## Contributors
 Guillaume Balaine Igosuki@github
-Michael Heillein nichaek@github
+Michael Heillein michaek@github
 
 ## License
 Copyright (c) 2008-2009 Christopher M. Eppstein<br>
