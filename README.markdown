@@ -10,6 +10,10 @@ This project includes reasonably similar implementations of some of the Ruby fun
 
 To make those functions available to your compass mixins, you'll want to either `@import "compass";` or `@import "compass/functions"'` before the specific compass scss files you import.
 
+## Contributors
+Guillaume Balaine Igosuki@github
+Michael Heillein nichaek@github
+
 ## License
 Copyright (c) 2008-2009 Christopher M. Eppstein<br>
 All Rights Reserved.<br>
