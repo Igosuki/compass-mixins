@@ -1,10 +1,11 @@
-// makes a list inline.
+@import "compass/support";
 
+// makes a list inline.
 @mixin inline-list {
   list-style-type: none;
   &, & li {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     display: inline;
   }
 }
@@ -30,8 +31,10 @@
     &:last-child {
       &:after { content: ""; }
     }
-    &.last {
-      &:after { content: ""; }
+    @if support-legacy-browser("ie", "7", $threshold: $css-sel2-support-threshold) {
+      &.last {
+        &:after { content: ""; }
+      }
     }
   }
 }
