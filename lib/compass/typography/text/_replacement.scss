@@ -1,3 +1,5 @@
+@import "compass/support";
+
 // Indicates the direction you prefer to move your text
 // when hiding it.
 //
@@ -55,6 +57,10 @@ $hide-text-direction: left !default;
     text-indent: 110%;
     white-space: nowrap;
     overflow: hidden;
+  }
+  @include for-legacy-browsers((ie: "7"), $critical-usage-threshold) {
+    //Text transform capitalize fixes text-replacement issue when used in a <button> element on ie7
+    text-transform:capitalize;
   }
 }
 
