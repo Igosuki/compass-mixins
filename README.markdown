@@ -2,7 +2,7 @@
 
 # Compass SASS Stylesheets
 
-This is a repository to pull SASS style sheets on Bower, and enjoy the compass mixins by using libsass for faster compilation. This project makes minimal modifications to the original stylesheets from the [original repository](https://github.com/Compass/compass/tree/stable/frameworks/compass/stylesheets), intented to improve libsass compatibility and not change output.
+This is a repository to pull SASS style sheets on Bower, and enjoy the compass mixins by using libsass for faster compilation. This project makes minimal modifications to the original stylesheets from the [original repository](https://github.com/Compass/compass/tree/stable/core/stylesheets), intented to improve libsass compatibility and not change output.
 
 ## Compass Ruby Functions
 
@@ -12,7 +12,7 @@ To make those functions available to your compass mixins, you'll want to either 
 
 ## Contributors
 Guillaume Balaine Igosuki@github
-Michael Heillein nichaek@github
+Michael Heillein michaek@github
 
 ## License
 Copyright (c) 2008-2009 Christopher M. Eppstein<br>
