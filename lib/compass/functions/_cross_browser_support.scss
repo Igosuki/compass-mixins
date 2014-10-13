@@ -21,7 +21,7 @@
   $properties: "";
 
   // Support for polymorphism.
-  @if length($property1) > 1 and $property2 == null {
+  @if type-of($property1) == 'list' {
     // Passing a single array of properties.
     $properties: $property1;
   } @else {
