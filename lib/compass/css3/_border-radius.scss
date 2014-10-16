@@ -47,7 +47,7 @@ $default-border-radius: 5px !default;
       not(-o),
       not(-ms),
       not(-khtml),
-      not official
+      not(official)
     );
     @include experimental("border-radius", $radius unquote("/") $vertical-radius,
       -moz,
@@ -76,7 +76,7 @@ $default-border-radius: 5px !default;
     not(-o),
     not(-ms),
     not(-khtml),
-    not official
+    not(official)
   );
   @include experimental("border-#{$vert}-#{$horz}-radius", $radius,
     not(-moz),

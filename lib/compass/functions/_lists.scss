@@ -17,7 +17,28 @@
   @return nth($list, $place);
 }
 
-// compass_list and compass_space_list can't be implemented in sass script
+// compass_list can't be implemented in sass script
+
+@function -compass-space-list($item1, $item2:null, $item3:null, $item4:null, $item5:null, $item6:null, $item7:null, $item8:null, $item9:null) {
+  // Support for polymorphism.
+  @if type-of($item1) == 'list' {
+    // Passing a single array of properties.
+    $items: $item1;
+  } @else {
+    $items: $item1 $item2 $item3 $item4 $item5 $item6 $item7 $item8 $item9;
+  }
+
+  $full: first-value-of($items);
+
+  @for $i from 2 through length($items) {
+    $item: nth($items, $i);
+    @if $item != null {
+      $full: $full $item;
+    }
+  }
+
+  @return $full;
+}
 
 @function -compass-list-size($list) {
   @return length($list);
@@ -50,4 +71,8 @@
     }
   }
   @return $full;
+}
+
+@function first-value-of($list) {
+  @return nth($list, 1);
 }

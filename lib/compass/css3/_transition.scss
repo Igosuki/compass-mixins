@@ -171,7 +171,7 @@ $transitionable-prefixed-values: transform, transform-origin !default;
     @if length($transition) > 3 { $delay:           nth($transition, 4); $has-delays: true; }
 
     // If a delay is provided without a timing function
-    @if is-time($timing-function) and not $delay { $delay: $timing-function; $timing-function: false; $has-delays: true; }
+    @if is-time($timing-function) and not($delay) { $delay: $timing-function; $timing-function: false; $has-delays: true; }
 
     // Keep a list of delays in case one is specified
     $delays: append($delays, if($delay, $delay, 0s));
