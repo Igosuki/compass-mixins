@@ -1,7 +1,7 @@
-/*
- * A partial implementation of the Ruby constants functions from Compass:
- * https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/constants.rb
- */
+// 
+// A partial implementation of the Ruby constants functions from Compass:
+// https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/constants.rb
+// 
 
 @function opposite-position($from) {
     @if ($from == top) {
