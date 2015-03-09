@@ -180,10 +180,8 @@ $base-half-leader: $base-leader / 2;
   @if not($relative-font-sizing) and $font-size != $base-font-size {
     @warn "$relative-font-sizing is false but a relative font size was passed to apply-side-rhythm-border";
   }
-  border-#{$side}: {
-    style: $border-style;
-    width: $font-unit * $width / $font-size;
-  };
+  border-#{$side}-style: $border-style;
+  border-#{$side}-width: $font-unit * $width / $font-size;
   padding-#{$side}: rhythm($lines, $font-size, $offset: $width);
 }
 
