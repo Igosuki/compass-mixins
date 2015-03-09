@@ -1,5 +1,6 @@
 @import "shared";
 @import "../utilities/general/hacks";
+@import "../functions";
 
 // Background property support for vendor prefixing within values.
 @mixin background(
