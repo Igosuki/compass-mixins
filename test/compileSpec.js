@@ -13,14 +13,13 @@ describe("Imports", function () {
     ["imports", "imports_animation"].forEach(function(importFile) {
       sass.render({
         file: __dirname + "/" + importFile,
-        success: function(s){
+      }, function(err, result) {
+        if(err != undefined) {
+          console.log(chalk.red("Sass error:"), err);
+        } else {
           success();
-          complete();
-        },
-        error: function(e){
-          console.log(chalk.red("Sass error:"), e);
-          complete();
         }
+        complete();
       });
     });
 

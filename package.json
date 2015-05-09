@@ -38,6 +38,7 @@
   "devDependencies": {
     "chalk": "^0.5.1",
     "jasmine-node": "^1.14.5",
-    "node-sass": "^2.1.1"
+    "node-sass": "^3.0.0",
+    "sassyjson": "^1.1.8"
   }
 }
