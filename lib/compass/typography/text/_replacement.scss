@@ -1,3 +1,5 @@
+@import "../../support";
+
 // Indicates the direction you prefer to move your text
 // when hiding it.
 //
@@ -18,7 +20,7 @@ $hide-text-direction: left !default;
   @include hide-text;
   background: {
     @if is-url($img) {
-      image: url($img);
+      image: $img;
     } @else {
       image: image-url($img);
     }
@@ -45,8 +47,8 @@ $hide-text-direction: left !default;
 // for your application.
 @mixin hide-text($direction: $hide-text-direction) {
   @if $direction == left {
-    $approximate-em-value: 12px;
-    $wider-than-any-screen: -9999;
+    $approximate-em-value: 12px / 1em;
+    $wider-than-any-screen: -9999em;
     text-indent: $wider-than-any-screen * $approximate-em-value;
     overflow: hidden;
     text-align: left;
@@ -55,6 +57,10 @@ $hide-text-direction: left !default;
     text-indent: 110%;
     white-space: nowrap;
     overflow: hidden;
+  }
+  @include for-legacy-browsers((ie: "7"), $critical-usage-threshold) {
+    //Text transform capitalize fixes text-replacement issue when used in a <button> element on ie7
+    text-transform:capitalize;
   }
 }
 

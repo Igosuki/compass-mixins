@@ -4,7 +4,7 @@
 
 // Apply an animation property and value with the correct browser support
 @mixin animation-support($property, $value) {
-  @include experimental($property, $value, -moz, -webkit, -o, -ms, not -khtml, official); }
+  @include experimental($property, $value, -moz, -webkit, -o, -ms, not(-khtml), official); }
 
 // Name of any animation as a string.
 $default-animation-name             : false !default;
