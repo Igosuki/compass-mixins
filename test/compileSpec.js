@@ -10,16 +10,19 @@ describe("Imports", function () {
       done();
     }
 
-    sass.render({
-      file: __dirname + "/imports.scss",
-      success: function(s){
-        success();
-        complete();
-      },
-      error: function(e){
-        complete();
-        console.log(chalk.red("Sass error:"), e);
-      }
+    ["imports", "imports_animation"].forEach(function(importFile) {
+      sass.render({
+        file: __dirname + "/" + importFile,
+        success: function(s){
+          success();
+          complete();
+        },
+        error: function(e){
+          console.log(chalk.red("Sass error:"), e);
+          complete();
+        }
+      });
     });
+
   });
 });
