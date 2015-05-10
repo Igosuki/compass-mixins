@@ -9,7 +9,7 @@ module.exports = function(data, callback, imports) {
     data: '@import "'+libDir+'/compass/functions";' + imports.join('') + data,
     outputStyle: 'compressed',
     success: function(output){
-      callback(output);
+      callback(output.css);
     },
     error: function(err){
       console.log(chalk.red("Sass error:"), err);
