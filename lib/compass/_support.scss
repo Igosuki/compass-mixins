@@ -1,3 +1,5 @@
+@import "functions/support_stubs";
+
 // Map of compass extensions that are loaded. The value will either be
 // the version of the extension or `true` if the version is unknown.
 $compass-extensions: compass-extensions() !default;
@@ -109,9 +111,9 @@ $css-sel2-support-threshold: $critical-usage-threshold !default;
 
 // Include content for a legacy browser
 // Version can be a single version string or a list of versions ordered from oldest to newest.
-@mixin for-legacy-browser($browser, $min-version, $max-version: $min-version,
-                          $threshold: $critical-usage-threshold,
-                          $ranges: ($browser: $min-version $max-version)) {
+@mixin for-legacy-browser($browser, $threshold: $critical-usage-threshold,
+                          $ranges: ($browser: $min-version $max-version),
+                          $min-version: "0", $max-version: $min-version) {
   @if not(browser-out-of-scope($browser, $max-version)) and
       support-legacy-browser($browser, $min-version, $max-version, $threshold)
   {
@@ -149,7 +151,7 @@ $css-sel2-support-threshold: $critical-usage-threshold !default;
   $rendered: false;
   @each $browser, $range in $browsers {
     @if not($rendered) {
-      @include for-legacy-browser($browser, $range..., $threshold: $threshold, $ranges: $browsers) {
+      @include for-legacy-browser($browser, $threshold: $threshold, $ranges: $browsers, $range...) {
         $rendered: true;
         @content;
       }
@@ -320,23 +322,7 @@ $css-sel2-support-threshold: $critical-usage-threshold !default;
 // Returns true if the prefixed usage stats for the capability exceed the threshold
 // or if the minimum version for a supported browser would require a prefix for the capability.
 @function use-prefix($prefix, $capability, $threshold, $capability-options: $default-capability-options) {
-  $usage: prefix-usage($prefix, $capability, $capability-options);
-  @if $usage > $threshold {
-    @return $usage;
-  } @else {
-    @each $browser in browsers($prefix) {
-      @if index($supported-browsers, $browser) {
-        $min-version: map-get($browser-minimum-versions, $browser);
-        @if $min-version {
-          $actual-prefix: browser-requires-prefix($browser, $min-version, $capability, $capability-options);
-          @if $actual-prefix and $prefix == $actual-prefix {
-            @return $browser $min-version;
-          }
-        }
-      }
-    }
-  }
-  @return false;
+  @return should-use-prefix($prefix, $capability, $capability-options);
 }
 
 @function prefix-identifier($ident, $prefix: $current-prefix) {

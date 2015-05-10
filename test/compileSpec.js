@@ -10,7 +10,7 @@ describe("Imports", function () {
       done();
     }
 
-    ["imports", "imports_animation"].forEach(function(importFile) {
+    ["imports", "imports_animation", "../lib/compass/support"].forEach(function(importFile) {
       sass.render({
         file: __dirname + "/" + importFile,
       }, function(err, result) {
