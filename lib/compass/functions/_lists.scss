@@ -20,6 +20,8 @@
 // compass_list can't be implemented in sass script
 
 @function -compass-space-list($item1, $item2:null, $item3:null, $item4:null, $item5:null, $item6:null, $item7:null, $item8:null, $item9:null) {
+  $items: null;
+
   // Support for polymorphism.
   @if type-of($item1) == 'list' {
     // Passing a single array of properties.
