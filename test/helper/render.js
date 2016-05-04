@@ -8,12 +8,13 @@ module.exports = function(data, callback, imports) {
   sass.render({
     data: '@import "'+libDir+'/compass/functions";' + imports.join('') + data,
     outputStyle: 'compressed',
-    success: function(output){
-      callback(output.css);
-    },
-    error: function(err){
+    includePaths: [__dirname],
+  }, function(err, output) {
+    if (err) {
       console.log(chalk.red("Sass error:"), err);
       callback('', err);
+    } else {
+      callback(output.css.toString().trim());
     }
   });
 }
