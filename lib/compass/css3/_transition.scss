@@ -176,9 +176,9 @@ $transitionable-prefixed-values: transform, transform-origin !default;
     // Keep a list of delays in case one is specified
     $delays: append($delays, if($delay, $delay, 0s));
 
-    $webkit-value: append($webkit-value, compact(prefixed-for-transition(-webkit, $property) $duration $timing-function));
-       $moz-value: append(   $moz-value, compact(prefixed-for-transition(   -moz, $property) $duration $timing-function $delay));
-         $o-value: append(     $o-value, compact(prefixed-for-transition(     -o, $property) $duration $timing-function $delay));
+    $webkit-value: append($webkit-value, compact((prefixed-for-transition(-webkit, $property) $duration $timing-function)...));
+       $moz-value: append(   $moz-value, compact((prefixed-for-transition(   -moz, $property) $duration $timing-function $delay)...));
+         $o-value: append(     $o-value, compact((prefixed-for-transition(     -o, $property) $duration $timing-function $delay)...));
   }
 
   @if $experimental-support-for-webkit    {       -webkit-transition : $webkit-value;

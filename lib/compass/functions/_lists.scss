@@ -20,6 +20,7 @@
 // compass_list can't be implemented in sass script
 
 @function -compass-space-list($item1, $item2:null, $item3:null, $item4:null, $item5:null, $item6:null, $item7:null, $item8:null, $item9:null) {
+  $items: ();
   // Support for polymorphism.
   @if type-of($item1) == 'list' {
     // Passing a single array of properties.
@@ -77,14 +78,13 @@
   @return nth($list, 1);
 }
 
-@if not(function-exists(compact)) {
-  @function compact($vars...) {
-    $list: ();
-    @each $var in $vars {
-        @if $var {
-            $list: append($list, $var, comma);
-        }
-    }
-    @return $list;
+@function compact($vars...) {
+  $separator: list-separator($vars);
+  $list: ();
+  @each $var in $vars {
+      @if $var {
+          $list: append($list, $var, $separator);
+      }
   }
+  @return $list;
 }
