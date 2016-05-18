@@ -15,3 +15,33 @@
     -moz, -webkit, not(-o), not(-ms), -khtml, official
   );
 }
+
+// Style the html5 input placeholder in browsers that support it.
+//
+// The styles for the input placeholder are passed as mixin content
+// and the selector comes from the mixin's context.
+//
+// For example:
+//
+//     #{elements-of-type(text-input)} {
+//       @include input-placeholder {
+//         color: #bfbfbf;
+//         font-style: italic;
+//       }
+//     }
+//
+// if you want to apply the placeholder styles to all elements supporting
+// the `input-placeholder` pseudo class (beware of performance impacts):
+//
+//     * {
+//       @include input-placeholder {
+//         color: #bfbfbf;
+//         font-style: italic;
+//       }
+//     }
+@mixin input-placeholder {
+  &:-ms-input-placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
