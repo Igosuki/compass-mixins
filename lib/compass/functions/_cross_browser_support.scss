@@ -1,7 +1,7 @@
-// 
+//
 // A partial implementation of the Ruby cross browser support functions from Compass:
 // https://github.com/Compass/compass/blob/stable/lib/compass/sass_extensions/functions/cross_browser_support.rb
-// 
+//
 
 @function prefixed($prefix, $property1, $property2:null, $property3:null, $property4:null, $property5:null, $property6:null, $property7:null, $property8:null, $property9:null) {
   $properties: $property1, $property2, $property3, $property4, $property5, $property6, $property7, $property8, $property9;
@@ -9,8 +9,8 @@
   @each $item in $properties {
     @if type-of($item) == 'string' {
       $prefixed: $prefixed or str-index($item, 'url') != 1 and str-index($item, 'rgb') != 1 and str-index($item, '#') != 1;
-    } @elseif type-of($item) == 'color' {
-    } @elseif $item != null {
+    } @else if type-of($item) == 'color' {
+    } @else if $item != null {
       $prefixed: true;
     }
   }
