@@ -24,7 +24,7 @@
   @if $experimental-support-for-webkit       and prefixed(-webkit, $backgrounds) {      background: -webkit($backgrounds); }
   @if $experimental-support-for-mozilla      and prefixed(-moz,    $backgrounds) {      background:    -moz($backgrounds); }
   @if $experimental-support-for-opera        and prefixed(-o,      $backgrounds) {      background:      -o($backgrounds); }
-  @if $experimental-support-for-pie          and $add-pie-bg                     { -pie-background:    -pie($backgrounds); }
+  @if $experimental-support-for-pie          and $add-pie-bg                     { -pie-background:         $backgrounds ; }
                                                                                         background:         $backgrounds ;
 }
 
