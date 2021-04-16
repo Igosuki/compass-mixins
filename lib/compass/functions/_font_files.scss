@@ -1,0 +1,95 @@
+//
+// A partial implementation of the Ruby fonts functions from Compass:
+// https://github.com/Compass/compass/blob/stable/core/lib/compass/core/sass_extensions/functions/font_files.rb
+//
+// and several functions from the file:
+// https://github.com/Compass/compass/blob/stable/core/lib/compass/core/sass_extensions/functions/urls.rb
+// -----------------------------------------------------------------------------
+// Helper functions font-files and font-url for font-face mixins.
+// -----------------------------------------------------------------------------
+// use mixin this way:
+//
+// $font-path: "/public/fonts/roboto";
+// @include font-face(
+//   'Roboto',
+//   font_files("roboto.ttf", "truetype", "roboto.woff", "roboto.woff2"),     // or
+//   font_files("roboto.ttf", "roboto.woff", "roboto.woff2"),
+//   "roboto.eot",    // [$eot]
+//   normal,          // [$weight]
+//   normal           // [$style]
+// );
+// -----------------------------------------------------------------------------
+
+
+@function font-url($path) {
+  $font-path: 'fonts' !default;
+  @return url("#{$font-path}/#{$path}");
+}
+
+
+// -----------------------------------------------------------------------------
+// helper function to create a list of font files for the src attribute in @font-face.
+// In the global variable $font-path, you can specify the path to the folder
+// with fonts relative to style files, by default the path to the fonts is "fonts".
+//
+// Usage: font-files ('file-name-w-ext'[, 'format'][,'file-name-w-ext'[, 'format']]...).
+// If the font format is not specified, the function will add the format corresponding to the file extension.
+//
+// for best results use this order: woff, opentype / truetype, svg.
+// -----------------------------------------------------------------------------
+// function ported from Ruby.
+// -----------------------------------------------------------------------------
+@function font-files($font-files...) {
+  $font-path: 'fonts' !default;
+  // types of font formats from module Compass::Core::SassExtensions::Functions::FontFiles.
+  $font-types: (
+    'woff': "woff",
+    'woff2': "woff2",
+    'opentype': "otf",
+    // 'opentype': "opentype",
+    'truetype': "ttf",
+    // 'truetype': "truetype",
+    'svg': "svg",
+    'embedded-opentype': "eot"
+  );
+
+  $full: '';
+  // if the font format is specified after the font file name, skip the next iteration.
+  $skip-next: false;
+  // number of font files including font format.
+  $font-file-length: length($font-files);
+
+  @for $i from 1 through $font-file-length {
+    @if(not $skip-next) {
+      $font-file: nth($font-files, $i);
+      $font-file-next: if($i < $font-file-length, nth($font-files, $i + 1), false);
+
+      // add font url.
+      $full: $full + 'url("#{$font-path}/#{$font-file}")';
+
+      // add the font format if it is specified after the font file name.
+      @if $font-file-next and map-has-key($font-types, $font-file-next) {
+        $full: $full + ' format("#{$font-file-next}")';
+        $skip-next: true;
+      } @else {
+        // add a font format based on the font file name extension.
+        @each $type, $extension in $font-types {
+          $pos: str-index($font-file, '.' + $extension);
+
+          @if($font-file-next == $extension) {
+            $full: $full + ' format("#{$type}")';
+            $skip-next: true;
+          } @else if ($pos and (to-lower-case(str-slice($font-file, $pos + 1)) == $extension)) {
+            $full: $full + ' format("#{$type}")';
+          }
+        }
+      }
+    } @else {
+      $skip-next: false;
+    }
+
+    @if (not $skip-next and $i != $font-file-length) { $full: $full + ', ';}
+  }
+
+  @return unquote($full);
+}
