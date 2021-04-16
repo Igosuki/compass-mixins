@@ -19,7 +19,7 @@ describe("CSS3 Images", function () {
 
   it("should generate multiple backgrounds of different types", function (done) {
     render(ruleset('$support-for-original-webkit-gradients: false !global; $experimental-support-for-mozilla: false !global; $experimental-support-for-opera: false !global; @include background(#fff, url(1.gif), linear-gradient(white, black))'), function(output, err) {
-      expect(output).toBe(ruleset('background:#fff,url(1.gif),-webkit-linear-gradient(#fff, #000);background:#fff,url(1.gif),linear-gradient(#fff, #000)'));
+      expect(output).toBe(ruleset('background:#fff,url(1.gif),-webkit-linear-gradient(white, black);background:#fff,url(1.gif),linear-gradient(white, black)'));
       done();
     }, ['compass/css3/images']);
   });

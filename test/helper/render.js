@@ -1,4 +1,4 @@
-var sass = require('node-sass');
+var sass = require('sass');
 var libDir = __dirname.replace(/test\/helper$/, 'lib');
 var chalk = require('chalk');
 
