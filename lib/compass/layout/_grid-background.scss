@@ -1,5 +1,3 @@
-@use "sass:math";
-
 @import "../css3/images";
 @import "../css3/background-size";
 
@@ -112,9 +110,9 @@ $grid-background-force-fluid      : false                       !default;
   $gutter-color   : $grid-background-gutter-color
 ) {
   $context: ($column * $total) + ($gutter * ($total - 1) + ($offset * 2));
-  $offset: math.div($offset, $context) * 100%;
-  $column: math.div($column, $context) * 100%;
-  $gutter: math.div($gutter, $context) * 100%;
+  $offset: cm-divide($offset, $context) * 100%;
+  $column: cm-divide($column, $context) * 100%;
+  $gutter: cm-divide($gutter, $context) * 100%;
 
   // return the horizontal grid as a set of color-stops
   $grid: build-grid-background($total,$column,$gutter,$offset,$column-color,$gutter-color);
