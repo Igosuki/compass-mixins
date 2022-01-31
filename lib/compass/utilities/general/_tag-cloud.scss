@@ -1,5 +1,4 @@
 // Emits styles for a tag cloud
-@use "sass:math";
 
 @mixin tag-cloud($base-size: 1em) {
   font-size: $base-size;
@@ -9,12 +8,12 @@
   .xxs {
     font-size: $base-size * 0.5; }
   .xs {
-    font-size: math.div(2 * $base-size, 3); }
+    font-size: $base-size * 0.667; }
   .s {
-    font-size: 3 * $base-size * 0.25; }
+    font-size: $base-size * 0.75; }
   .l {
-    font-size: math.div(4 * $base-size, 3); }
+    font-size: $base-size * 1.333; }
   .xl {
-    font-size: 3 * $base-size * 0.5; }
+    font-size: $base-size * 1.5; }
   .xxl {
-    font-size: 2 * $base-size; } }
+    font-size: $base-size * 2; } }
