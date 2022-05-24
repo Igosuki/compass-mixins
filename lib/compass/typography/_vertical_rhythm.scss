@@ -29,15 +29,15 @@ $min-line-padding: 2px !default;
 $font-unit: if($relative-font-sizing, 1em, $base-font-size) !default;
 
 // The basic unit of font rhythm.
-$base-rhythm-unit: $base-line-height / $base-font-size * $font-unit;
+$base-rhythm-unit: calc($base-line-height / $base-font-size * $font-unit);
 
 // The leader is the amount of whitespace in a line.
 // It might be useful in your calculations.
-$base-leader: ($base-line-height - $base-font-size) * $font-unit / $base-font-size;
+$base-leader: calc(($base-line-height - $base-font-size) * $font-unit / $base-font-size);
 
 // The half-leader is the amount of whitespace above and below a line.
 // It might be useful in your calculations.
-$base-half-leader: $base-leader / 2;
+$base-half-leader: calc($base-leader / 2);
 
 // True if a number has a relative unit.
 @function relative-unit($number) {
@@ -59,7 +59,7 @@ $base-half-leader: $base-leader / 2;
   // whose root is set in ems. So we set the root font size in percentages of
   // the default font size.
   * html {
-    font-size: 100% * ($font-size / $browser-default-font-size);
+    font-size: 100% * calc($font-size / $browser-default-font-size);
   }
   html {
     font-size: $font-size;
@@ -96,7 +96,7 @@ $base-half-leader: $base-leader / 2;
   @if not($relative-font-sizing) and $from-size != $base-font-size {
     @warn "$relative-font-sizing is false but a relative font size was passed to adjust-font-size-to";
   }
-  font-size: $font-unit * $to-size / $from-size;
+  font-size: calc($font-unit * $to-size / $from-size);
   @include adjust-leading-to($lines, if($relative-font-sizing, $to-size, $base-font-size));
 }
 
@@ -117,7 +117,7 @@ $base-half-leader: $base-leader / 2;
   @if not($relative-font-sizing) and $font-size != $base-font-size {
     @warn "$relative-font-sizing is false but a relative font size was passed to the rhythm function";
   }
-  $rhythm: $font-unit * ($lines * $base-line-height - $offset) / $font-size;
+  $rhythm: calc($font-unit * ($lines * $base-line-height - $offset) / $font-size);
   // Round the pixels down to nearest integer.
   @if unit($rhythm) == px {
     $rhythm: floor($rhythm);
@@ -181,7 +181,7 @@ $base-half-leader: $base-leader / 2;
     @warn "$relative-font-sizing is false but a relative font size was passed to apply-side-rhythm-border";
   }
   border-#{$side}-style: $border-style;
-  border-#{$side}-width: $font-unit * $width / $font-size;
+  border-#{$side}-width: calc($font-unit * $width / $font-size);
   padding-#{$side}: rhythm($lines, $font-size, $offset: $width);
 }
 
@@ -192,7 +192,7 @@ $base-half-leader: $base-leader / 2;
   }
   border: {
     style: $border-style;
-    width: $font-unit * $width / $font-size;
+    width: calc($font-unit * $width / $font-size);
   };
   padding: rhythm($lines, $font-size, $offset: $width);
 }

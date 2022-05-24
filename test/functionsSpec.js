@@ -79,7 +79,7 @@ describe("Cross Browser Functions", function () {
   });
 
   it("should prefix a list of complex properties", function(done) {
-    render(property('prefix(-webkit, linear-gradient(-45deg, rgb(0,0,0) 25%, transparent 75%, transparent), linear-gradient(-45deg, #000 25%, transparent 75%, transparent))'), function(output, err) {
+    render(property('prefix(-webkit, linear-gradient(-45deg, black 25%, transparent 75%, transparent), linear-gradient(-45deg, #000 25%, transparent 75%, transparent))'), function(output, err) {
       expect(output).toBe(property('-webkit-linear-gradient(-45deg, black 25%, transparent 75%, transparent),-webkit-linear-gradient(-45deg, #000 25%, transparent 75%, transparent)'));
       done();
     });
@@ -125,7 +125,7 @@ describe("Cross Browser Functions", function () {
 describe("Gradient Functions", function () {
 
   it("should prefix a list with color stops", function(done) {
-    render(property('prefix(-webkit, linear-gradient(-45deg, color-stops(rgb(0,0,0) 25%, transparent 75%, transparent)), linear-gradient(-45deg, color-stops(#000 25%, transparent 75%, transparent)))'), function(output, err) {
+    render(property('prefix(-webkit, linear-gradient(-45deg, color-stops(black 25%, transparent 75%, transparent)), linear-gradient(-45deg, color-stops(#000 25%, transparent 75%, transparent)))'), function(output, err) {
       expect(output).toBe(property('-webkit-linear-gradient(-45deg, black 25%, transparent 75%, transparent),-webkit-linear-gradient(-45deg, #000 25%, transparent 75%, transparent)'));
       done();
     });
